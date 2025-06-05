@@ -25,7 +25,7 @@ Welcome to **Link`s Vault app**, a robust and user-friendly Python application d
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/Agent0505/Link-s-Vault-app.git
-   cd socialsync-scraper
+   cd Link-s-Vault-app
    ```
 
 2. **Set Up a Virtual Environment** (Recommended):
@@ -41,7 +41,7 @@ Welcome to **Link`s Vault app**, a robust and user-friendly Python application d
 
 4. **Run the App**:
    ```bash
-   python main.py --platform pinterest --query "python tutorials" --output results.json
+   python app2.py
    ```
 
 ---
