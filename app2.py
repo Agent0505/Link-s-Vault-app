@@ -58,6 +58,32 @@ class JSONStorage:
     def all_groups(self):
         return self.groups
 
+class SQLiteStorage(StorageInterface):
+    def __init__(self, db_path='data.db'):
+        self.conn = sqlite3.connect(db_path)
+        self._init_db()
+
+    def _init_db(self):
+        self.conn.execute('''CREATE TABLE IF NOT EXISTS posts (
+            id INTEGER PRIMARY KEY,
+            title TEXT,
+            description TEXT,
+            tags TEXT,
+            images TEXT,
+            platform TEXT,
+            url TEXT
+        )''')
+
+    def save_post(self, post: PostData):
+        self.conn.execute('INSERT INTO posts (title, description, tags, images, platform, url) VALUES (?, ?, ?, ?, ?, ?)',
+                          (post.title, post.description, json.dumps(post.tags), json.dumps(post.images), post.platform, post.url))
+        self.conn.commit()
+
+    def get_all_posts(self) -> List[PostData]:
+        cursor = self.conn.execute('SELECT title, description, tags, images, platform, url FROM posts')
+        return [PostData(title, desc, json.loads(tags), json.loads(images), platform, url) for title, desc, tags, images, platform, url in cursor]
+
+
 class BaseFetcher:
     def fetch(self, url):
         return PostData(
