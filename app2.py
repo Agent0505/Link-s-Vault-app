@@ -521,7 +521,7 @@ class PostApp(QtWidgets.QMainWindow):
             except Exception as e:
                 QtWidgets.QMessageBox.warning(self, "Import Error", f"Failed to import: {e}")
 
-if __name__ == "__main__":
+def main(self):
     parser = argparse.ArgumentParser()
     parser.add_argument('--storage', choices=['json', 'sqlite'], default='json')
     parser.add_argument('--fetch', type=str, help='Fetch URL and save to DB')
@@ -546,3 +546,6 @@ if __name__ == "__main__":
     w = PostApp(storage)
     w.show()
     sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    main()
